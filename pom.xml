@@ -11,7 +11,7 @@
 	<groupId>com.example.springboot</groupId>
 	<artifactId>mywebapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mywebapp</name>
+	<name>myWebApp</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -46,7 +46,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
