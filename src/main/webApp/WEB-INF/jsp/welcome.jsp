@@ -9,5 +9,6 @@
     <div>Welcome to Todo app</div>
     <div>Your Name: ${name}</div>
     <div>Your Password: ${password}</div>
+    <div><a href="list-todos">Manage</a></div>
 </body>
 </html>
