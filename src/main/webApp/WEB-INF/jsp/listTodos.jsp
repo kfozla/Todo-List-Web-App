@@ -6,7 +6,7 @@
     <title>List Todos Page </title>
 </head>
 <body>
-    <h1>Welcome to the List Todos page ${name}.</h1>
+    <h1>Welcome to the List Todos page.</h1>
     <div>Your Todos Are ${todos}</div>
 </body>
 </html>
