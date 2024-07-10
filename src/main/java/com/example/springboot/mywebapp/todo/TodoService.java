@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
+
 @Service
 public class TodoService {
     private static List<Todo> todos=new ArrayList<>();
@@ -25,5 +27,9 @@ public class TodoService {
         Todo todo=new Todo(++todosCount,userName,description,targetDate,isItDone);
         todos.add(todo);
 
+    }
+    public void deleteById(int id){
+        Predicate<? super Todo> predicate= todo -> todo.getId()==id;
+        todos.removeIf(predicate);
     }
 }
