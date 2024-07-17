@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.time.LocalDate;
 import java.util.List;
 
-//@Controller
+@Controller
 @SessionAttributes("name")
-public class TodoController {
-    private TodoService todoService;
-    public TodoController(TodoService todoService){
+public class TodoControllerJPA {
+    private TodoRepository todoRepository;
+    public TodoControllerJPA(TodoService todoService,TodoRepository todoRepository){
         super();
-        this.todoService=todoService;
+        this.todoRepository=todoRepository;
     }
     @RequestMapping("/list-todos")
     public String listTodos(ModelMap map){
-        List<Todo> todos = todoService.findByUserName(getLoggedInUserName(map));
+        List<Todo> todos = todoRepository.findByUserName(getLoggedInUserName(map));
         map.addAttribute("todos",todos);
         return "listTodos";
     }
@@ -38,17 +38,18 @@ public class TodoController {
         if(result.hasErrors()){
             return "todo";
         }
-        todoService.AddTodo(getLoggedInUserName(model),todo.getDescription(), todo.getTargetDate(),false);
+        todo.setUserName(getLoggedInUserName(model));
+        todoRepository.save(todo);
         return "redirect:list-todos";
     }
     @RequestMapping("/delete-todo")
     public String deleteTodo(@RequestParam int id){
-        todoService.deleteById(id);
+        todoRepository.deleteById(id);
         return "redirect:list-todos";
     }
     @RequestMapping("/update-todo")
     public String updateTodoPage(@RequestParam int id, ModelMap model){
-        Todo todo =todoService.findById(id);
+        Todo todo =todoRepository.findById(id).get();
         model.put("todo",todo);
         return "todo";
     }
@@ -58,7 +59,8 @@ public class TodoController {
             return "todo";
         }
         todo.setUserName(getLoggedInUserName(model));
-        todoService.updateTodo(todo);
+       //todoService.updateTodo(todo);
+        todoRepository.save(todo);
         return "redirect:list-todos";
     }
 
